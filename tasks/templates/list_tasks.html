@@ -295,12 +295,23 @@ body {
                         <h3 class="task-title">{{ task.title }}</h3>
                         <p class="task-desc">{{ task.description }}</p>
                     </div>
-                    <form class="delete-form" action="{% url 'delete_task' task.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" class="delete-btn" aria-label="Eliminar tarea {{ task.title }}">
-                            Eliminar
-                        </button>
-                    </form>
+                    <div class="task-actions" style="display:flex; gap:8px; align-items:center;">
+                        <details>
+                            <summary class="toggle-btn" aria-label="Editar tarea {{ task.title }}" style="list-style:none; display:inline-block;">Editar</summary>
+                            <form action="{% url 'edit_task' task.id %}" method="POST" class="task-form" style="margin-top:10px; min-width:260px;">
+                                {% csrf_token %}
+                                <input type="text" name="title" value="{{ task.title }}" placeholder="Título" required>
+                                <textarea name="description" rows="2" placeholder="Descripción">{{ task.description }}</textarea>
+                                <button type="submit" class="add-btn">Guardar cambios</button>
+                            </form>
+                        </details>
+                        <form class="delete-form" action="{% url 'delete_task' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn" aria-label="Eliminar tarea {{ task.title }}">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
                 </article>
             {% empty %}
                 <p class="no-tasks">No hay tareas aún</p>
