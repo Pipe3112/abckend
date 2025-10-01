@@ -16,8 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/', include('tasks.urls')),
+    # 👇 opción A: mensaje de bienvenida
+    path('', lambda request: HttpResponse("Bienvenido a mi API Django 🚀")),
+    
+    # 👇 opción B: redirigir directamente a tasks/
+    # path('', lambda request: redirect('tasks/')),
 ]
+
