@@ -296,8 +296,9 @@ body {
                         <p class="task-desc">{{ task.description }}</p>
                     </div>
                     <div class="task-actions" style="display:flex; gap:8px; align-items:center;">
-                        <details>
-                            <summary class="toggle-btn" aria-label="Editar tarea {{ task.title }}" style="list-style:none; display:inline-block;">Editar</summary>
+                        <button type="button" class="toggle-btn edit-btn" data-task-id="{{ task.id }}" aria-controls="edit-{{ task.id }}" aria-expanded="false">Editar</button>
+                        <details id="edit-{{ task.id }}">
+                            <summary class="visually-hidden">Editar</summary>
                             <form action="{% url 'edit_task' task.id %}" method="POST" class="task-form" style="margin-top:10px; min-width:260px;">
                                 {% csrf_token %}
                                 <input type="text" name="title" value="{{ task.title }}" placeholder="Título" required>
@@ -354,6 +355,26 @@ body {
             }
         });
     })();
+    function toggleEdit(id, buttonEl) {
+        var details = document.getElementById('edit-' + id);
+        if (!details) return;
+        var isOpen = details.hasAttribute('open');
+        if (isOpen) {
+            details.removeAttribute('open');
+            if (buttonEl) buttonEl.setAttribute('aria-expanded', 'false');
+        } else {
+            details.setAttribute('open', 'open');
+            if (buttonEl) buttonEl.setAttribute('aria-expanded', 'true');
+        }
+    }
+    // Delegated listener for edit buttons
+    document.addEventListener('click', function(e) {
+        var target = e.target;
+        if (target && target.classList && target.classList.contains('edit-btn')) {
+            var id = target.getAttribute('data-task-id');
+            toggleEdit(id, target);
+        }
+    });
     </script>
 </body>
 </html>
