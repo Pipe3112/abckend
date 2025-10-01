@@ -4,8 +4,8 @@
 
 /* ---- Variables de color ---- */
 :root {
-    --bg-light-start: #fdfbfb;
-    --bg-light-end: #ebedee;
+    --bg-start: #fdfbfb;
+    --bg-end: #ebedee;
     --card-bg: #ffffff;
     --card-border: #e9eef3;
     --accent: #7aa7ff;
@@ -16,13 +16,27 @@
     --danger: #ff6b6b;
 }
 
+[data-theme="dark"] {
+    --bg-start: #0e1424;
+    --bg-end: #0b1220;
+    --card-bg: #0f172a;
+    --card-border: #0b1220;
+    --accent: #7aa7ff;
+    --accent-2: #60c2ff;
+    --text-primary: #e5e7eb;
+    --text-secondary: #cbd5e1;
+    --success: #3cb371;
+    --danger: #ff6b6b;
+}
+
 /* ---- Reset y body ---- */
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(120deg, var(--bg-light-start) 0%, var(--bg-light-end) 100%);
+    background: linear-gradient(120deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    color: var(--text-primary);
     margin: 0;
     padding: 0;
-    transition: background 0.3s, color 0.3s;
+    transition: all 0.3s ease;
 }
 
 /* ---- Container principal ---- */
@@ -34,13 +48,12 @@ body {
     border: 1px solid var(--card-border);
     box-shadow: 0 6px 24px rgba(0,0,0,0.1);
     padding: 32px 24px;
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
 }
 
 /* ---- Header ---- */
 .main-title {
     text-align: center;
-    color: var(--text-primary);
     font-size: 2.2rem;
     margin-bottom: 16px;
     letter-spacing: 1px;
@@ -61,8 +74,9 @@ body {
     cursor: pointer;
     font-size: 0.95rem;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    transition: background 0.2s, transform 0.05s ease;
+    transition: all 0.2s ease;
 }
+
 .toggle-btn:hover { background: #f3f4f6; }
 .toggle-btn:active { transform: scale(0.98); }
 
@@ -75,8 +89,9 @@ body {
     border: 1px solid #bfc9d1;
     border-radius: 6px;
     font-size: 1rem;
-    background: #f8fafc;
-    transition: border-color 0.2s, background 0.2s;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    transition: all 0.2s ease;
 }
 
 .task-form input[type="text"]:focus,
@@ -96,9 +111,8 @@ body {
     box-shadow: 0 4px 12px rgba(90,173,226,0.2);
     transition: all 0.25s ease-in-out;
 }
-.add-btn:hover {
-    background: linear-gradient(90deg, #9dc0ff 0%, var(--accent) 100%);
-}
+
+.add-btn:hover { background: linear-gradient(90deg, #9dc0ff 0%, var(--accent) 100%); }
 .add-btn:active { transform: translateY(1px); }
 
 /* ---- Sección de tareas ---- */
@@ -113,13 +127,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f8fafc;
+    background: var(--card-bg);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(44,62,80,0.06);
     padding: 18px 16px;
     border-left: 5px solid var(--accent);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.25s ease;
 }
+
 .task-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -127,15 +142,11 @@ body {
 
 .task-title {
     margin: 0 0 6px 0;
-    color: var(--text-primary);
     font-size: 1.15rem;
     font-weight: 600;
 }
-.task-desc {
-    margin: 0;
-    color: var(--text-secondary);
-    font-size: 0.98rem;
-}
+
+.task-desc { margin: 0; font-size: 0.98rem; color: var(--text-secondary); }
 
 /* ---- Botón eliminar ---- */
 .delete-btn {
@@ -149,67 +160,26 @@ body {
     box-shadow: 0 2px 8px rgba(231,76,60,0.10);
     transition: all 0.25s ease-in-out;
 }
-.delete-btn:hover {
-    background: linear-gradient(90deg, #ff8e8e 0%, var(--danger) 100%);
-}
+
+.delete-btn:hover { background: linear-gradient(90deg, #ff8e8e 0%, var(--danger) 100%); }
 .delete-btn:active { transform: translateY(1px); }
 
 /* ---- Estado vacío ---- */
-.no-tasks {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    margin-top: 24px;
-}
+.no-tasks { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-top: 24px; }
 
 /* ---- Footer ---- */
 .app-footer {
     margin-top: 28px;
     text-align: center;
-    color: #95a5a6;
+    color: var(--text-secondary);
 }
-.app-footer a {
-    color: var(--accent);
-    text-decoration: none;
-}
+
+.app-footer a { color: var(--accent); text-decoration: none; }
 .app-footer a:hover { text-decoration: underline; }
 
 /* ---- Responsividad ---- */
 @media (max-width: 700px) {
-    .container {
-        padding: 16px 12px;
-    }
+    .container { padding: 16px 12px; }
     .main-title { font-size: 1.5rem; }
     .task-card { flex-direction: column; align-items: stretch; gap: 10px; }
 }
-
-/* ---- Dark mode ---- */
-body[data-theme="dark"] {
-    background: radial-gradient(1000px 500px at 0% 0%, #0e1424 0%, #0b1220 40%, #0b1220 100%);
-    color: #e5e7eb;
-}
-body[data-theme="dark"] .container {
-    background: #0f172a;
-    border-color: #0b1220;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.55);
-}
-body[data-theme="dark"] .main-title { color: #e5e7eb; }
-body[data-theme="dark"] .task-card {
-    background: #0b1220;
-    border-left-color: #7aa7ff;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.45);
-}
-body[data-theme="dark"] .task-title { color: #f3f4f6; }
-body[data-theme="dark"] .task-desc { color: #cbd5e1; }
-body[data-theme="dark"] .task-form input[type="text"],
-body[data-theme="dark"] .task-form textarea {
-    background: #0b1220;
-    color: #e5e7eb;
-    border-color: #1f2937;
-}
-body[data-theme="dark"] .toggle-btn {
-    background: #0b1220;
-    color: #e5e7eb;
-    border-color: #1f2937;
-}
-body[data-theme="dark"] .app-footer a { color: #7aa7ff; }
