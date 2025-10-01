@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'taskdb_cbi9',
         'USER': 'taskdb_cbi9_user',
-        'PASSWORD': 'qBp9clt4orSBOBW6yqgYpDPp8GIJ37HX',
+        'PASSWORD': '***',
         'HOST': 'dpg-d3di6mre5dus73bmh78g-a',
         'PORT': '5432',
     }
