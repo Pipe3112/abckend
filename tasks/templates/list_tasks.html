@@ -1,43 +1,81 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Aplicación simple para gestionar una lista de tareas.">
+    <title>Lista de Tareas</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 
 <body>
     <div class="container">
-        <header>
-            <h1 class="main-title">Lista de Tareas</h1>
+        <header class="app-header">
+            <div class="header-row">
+                <h1 class="main-title">Lista de Tareas</h1>
+                <button id="themeToggle" class="toggle-btn" type="button" aria-pressed="false" aria-label="cambiar tema">🌙</button>
+            </div>
         </header>
-        <section class="form-section">
+
+        <section class="form-section" aria-labelledby="form-title">
+            <h2 id="form-title" class="visually-hidden">Crear nueva tarea</h2>
             <form class="task-form" action="{% url 'create_task' %}" method="POST">
                 {% csrf_token %}
-                <input type="text" name="title" placeholder="Escribe el título" required>
-                <input type="text" name="description" rows="3" placeholder="Escribe la descripción de la tarea"></input>
-                <button class="add-btn">Agregar tarea</button>
+                <input type="text" name="title" placeholder="Escribe el título" aria-label="Título de la tarea" required>
+                <textarea name="description" rows="3" placeholder="Escribe la descripción de la tarea" aria-label="Descripción de la tarea"></textarea>
+                <button class="add-btn" type="submit">Agregar tarea</button>
             </form>
         </section>
-        <section class="tasks-section">
+
+        <section class="tasks-section" aria-labelledby="list-title">
+            <h2 id="list-title" class="visually-hidden">Listado de tareas</h2>
             {% for task in tasks %}
-                <div class="task-card">
+                <article class="task-card">
+
                     <div class="task-info">
                         <h3 class="task-title">{{ task.title }}</h3>
                         <p class="task-desc">{{ task.description }}</p>
                     </div>
                     <form class="delete-form" action="{% url 'delete_task' task.id %}" method="POST">
                         {% csrf_token %}
-                        <input type="submit" value="Eliminar" class="delete-btn">
+                        <input type="submit" value="Eliminar" class="delete-btn" aria-label="Eliminar tarea {{ task.title }}">
                     </form>
-                </div>
+                </article>
             {% empty %}
                 <p class="no-tasks">No hay tareas aún</p>
             {% endfor %}
         </section>
+        <footer class="app-footer">
+            <small>Hecho con Django • <a href="/tasks/">Actualizar</a></small>
+        </footer>
     </div>
+
+    <script>
+    (function() {
+        const btn = document.getElementById('themeToggle');
+        const stored = localStorage.getItem('theme');
+        if (stored === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            if (btn) btn.textContent = '☀️';
+        }
+        btn && btn.addEventListener('click', function() {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.body.removeAttribute('data-theme');
+                localStorage.removeItem('theme');
+                btn.textContent = '🌙';
+                btn.setAttribute('aria-pressed', 'false');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                btn.textContent = '☀️';
+                btn.setAttribute('aria-pressed', 'true');
+            }
+        });
+    })();
+    </script>
 </body>
 </html>
