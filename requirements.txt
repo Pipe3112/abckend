@@ -8,7 +8,9 @@ mysqlclient==2.2.7
 numpy==2.3.0
 opencv-python==4.11.0.86
 packaging==25.0
+psycopg2-binary==2.9.10
 PyJWT==2.9.0
 python-dotenv==1.0.1
 sqlparse==0.5.3
 tzdata==2025.2
+psycopg2-binary==2.9.10
