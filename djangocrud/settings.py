@@ -74,13 +74,9 @@ WSGI_APPLICATION = 'djangocrud.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'taskdb_cbi9',
-        'USER': 'taskdb_cbi9_user',
-        'PASSWORD': '***',
-        'HOST': 'dpg-d3di6mre5dus73bmh78g-a',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
