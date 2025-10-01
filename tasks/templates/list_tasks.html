@@ -56,20 +56,24 @@
     <script>
     (function() {
         const btn = document.getElementById('themeToggle');
+        const root = document.documentElement; // <html>
         const stored = localStorage.getItem('theme');
         if (stored === 'dark') {
             document.body.setAttribute('data-theme', 'dark');
+            root.setAttribute('data-theme', 'dark');
             if (btn) btn.textContent = '☀️';
         }
         btn && btn.addEventListener('click', function() {
-            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            const isDark = document.body.getAttribute('data-theme') === 'dark' || root.getAttribute('data-theme') === 'dark';
             if (isDark) {
                 document.body.removeAttribute('data-theme');
+                root.removeAttribute('data-theme');
                 localStorage.removeItem('theme');
                 btn.textContent = '🌙';
                 btn.setAttribute('aria-pressed', 'false');
             } else {
                 document.body.setAttribute('data-theme', 'dark');
+                root.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
                 btn.textContent = '☀️';
                 btn.setAttribute('aria-pressed', 'true');

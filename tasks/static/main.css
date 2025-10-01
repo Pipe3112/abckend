@@ -211,3 +211,83 @@ body[data-theme="dark"] .toggle-btn {
 body[data-theme="dark"] .app-footer { color: #9ca3af; }
 body[data-theme="dark"] .app-footer a { color: #60a5fa; }
 
+/* ---- Pastel palette and refined visuals (light mode overrides) ---- */
+:root {
+    --bg-grad-start: #fdfbfb;
+    --bg-grad-end: #ebedee;
+    --card-bg: #ffffff;
+    --card-border: #e9eef3;
+    --accent: #7aa7ff; /* pastel blue */
+    --accent-2: #ffb3c1; /* pastel pink */
+    --text-1: #2c3e50;
+    --text-2: #6b7c93;
+    --success: #8bd3dd;
+    --danger: #ff6b6b;
+}
+
+body {
+    background: linear-gradient(120deg, var(--bg-grad-start) 0%, var(--bg-grad-end) 100%);
+}
+.container {
+    max-width: 720px;
+    border: 1px solid var(--card-border);
+}
+.main-title {
+    letter-spacing: 0.3px;
+}
+.task-card {
+    background: var(--card-bg);
+    border-left-color: var(--accent);
+    backdrop-filter: saturate(120%) blur(2px);
+}
+.add-btn {
+    background: linear-gradient(90deg, var(--accent) 0%, #9dc0ff 100%);
+}
+.add-btn:hover {
+    background: linear-gradient(90deg, #9dc0ff 0%, var(--accent) 100%);
+}
+.delete-btn {
+    background: linear-gradient(90deg, var(--danger) 0%, #ff8e8e 100%);
+}
+.delete-btn:hover { background: linear-gradient(90deg, #ff8e8e 0%, var(--danger) 100%); }
+
+/* Accent divider on header */
+.app-header::after {
+    content: "";
+    display: block;
+    height: 3px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 100%);
+    opacity: 0.6;
+}
+
+/* Centered empty state */
+.no-tasks {
+    color: var(--text-2);
+}
+
+/* ---- Dark mode: apply for body or html data attribute ---- */
+html[data-theme="dark"],
+body[data-theme="dark"] { background: radial-gradient(1000px 500px at 0% 0%, #0e1424 0%, #0b1220 40%, #0b1220 100%); }
+html[data-theme="dark"] .container,
+body[data-theme="dark"] .container { background: #0f172a; border-color: #0b1220; }
+html[data-theme="dark"] .main-title,
+body[data-theme="dark"] .main-title { color: #e5e7eb; }
+html[data-theme="dark"] .task-card,
+body[data-theme="dark"] .task-card { background: #0b1220; border-left-color: #7aa7ff; }
+html[data-theme="dark"] .task-title,
+body[data-theme="dark"] .task-title { color: #f3f4f6; }
+html[data-theme="dark"] .task-desc,
+body[data-theme="dark"] .task-desc { color: #cbd5e1; }
+html[data-theme="dark"] .task-form input[type="text"],
+body[data-theme="dark"] .task-form input[type="text"],
+html[data-theme="dark"] .task-form textarea,
+body[data-theme="dark"] .task-form textarea { background: #0b1220; color: #e5e7eb; border-color: #1f2937; }
+html[data-theme="dark"] .toggle-btn,
+body[data-theme="dark"] .toggle-btn { background: #0b1220; color: #e5e7eb; border-color: #1f2937; }
+html[data-theme="dark"] .app-footer,
+body[data-theme="dark"] .app-footer { color: #9ca3af; }
+html[data-theme="dark"] .app-footer a,
+body[data-theme="dark"] .app-footer a { color: #7aa7ff; }
+
